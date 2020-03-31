@@ -6,6 +6,7 @@
 
   <title>Stack</title>
   <meta name="Simulator of Stacks" content="CS 300 project 2">
+  <!--CSS style section for formatting shapes -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 	.dot {
@@ -25,7 +26,7 @@
 <body>
 
 	<h1 align = "center">Stack Visualizer</h1>
-
+<!--divs for maniplulating visuals with CSS and JavaScript -->
 	<div id ="nodes" style="text-align:center">
 		<span class="dot" id = "dot1">50</span>
 		<span class="dot" id = "dot2">60</span>
@@ -36,7 +37,7 @@
 		<p id = "p1" align="center">Enter Data Below to fill stack
 		</p>		
 	</div>
-
+<!--Buttons -->
 	<div id = "buttons" style= "width:100%; height:100%"align="center">
 		<button id = "Back" onclick="window.location.href = 'https://adamweatherby.github.io/CS300-Project-2/'">Back</button>
 		<button id = "Randomizer" onclick= "random()">Randomizer(Creates Random Stack of 3 variables)</button>
@@ -48,6 +49,7 @@
 		
 		<br/><br/>
 	</div>
+	<!--Boxes for user inputted data-->
 	<div id = "inputters"style= "width:100%; height:100%"align="right">
 		Input Data(1 or 2 digit numbers only): <input type="text" id="inputBox" value="Number"><br/>
 		Indice selector (arr[x]): <input type="text" id="selectionBox" value="Number"><br/>
@@ -56,11 +58,13 @@
 
 </body>
 	<script>
+	<!--declaring of variables-->
 			increaser = 0;
 			decreaser = 0;
 			first = Math.random()*100|0;
 			second = Math.random()*100|0;
 			third = Math.random()*100|0;
+	<!--"random" creates random Stack of 3 variables, and resets it to a Stack of 3 variables"-->
 	function random(){
 			increaser = 0;
 			decreaser = 0;
@@ -69,17 +73,20 @@
 			third = Math.random()*100|0;
 			document.getElementById("nodes").innerHTML = "<span class='dot' id = 'dot1'>"+first+"</span>&nbsp;<span class='dot' id = 'dot2'>"+second+"</span>&nbsp;<span class='dot' id = 'dot3'>"+third+"</span>"
 		}
+	<!--Adds 7 variables-->
 	function addSeven(){
 		for(x = 0; x < 7; x++){
 			increaser+= 1;
 			document.getElementById("nodes").innerHTML += "&nbsp;<span class='dot' id = 'dot"+(increaser+3)+"'>"+(Math.random()*100|0)+"</span>";
 		}
 	}
+	<!--method to add elements to the top of the stack-->
 	function addElement(){
 			increaser++;
 			var input = document.getElementById("inputBox").value;
 			document.getElementById("nodes").innerHTML += "&nbsp;<span class='dot' id = 'dot"+(increaser+3)+"'>"+input+"</span>";
 	}
+	<!--method to remove elements from the bottom of the stack-->
 	function removeElement(){
 			if(document.getElementById('dot'+(increaser+3)).innerHTML.charAt(1)=='<')
 				window.alert(document.getElementById('dot'+(increaser+3)).innerHTML.substr(0, 1)+" was removed from the top of the stack");
@@ -90,6 +97,7 @@
 			decreaser++;
 			increaser--;
 			}
+	<!--Changes element of selected Index with a selected value-->
 	function modifyElement(){
 			var selection = document.getElementById("selectionBox").value;
 			selection++;
@@ -98,6 +106,7 @@
 			console.log(input);
 			document.getElementById("dot"+(selection)).innerHTML = input;
 	}
+	<!--returns indices of a specified value-->
 	function searchElement(){
 			var search = document.getElementById("searchBox").value;
 			var x = 2;
