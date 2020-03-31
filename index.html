@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Stack</title>
+  <meta name="Simulator of Stacks" content="CS 300 project 2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	.dot {
+	height: 50px;
+	width: 50px;
+	background-color:blue;
+	color: white;
+	lineWidth = 5;
+	}
+
+</style>
+	
+  <link rel="stylesheet" href="css/styles.css?v=1.0">
+
+</head>
+
+<body>
+
+	<h1 align = "center">Stack Visualizer</h1>
+
+	<div id ="nodes" style="text-align:center">
+		<span class="dot" id = "dot1">50</span>
+		<span class="dot" id = "dot2">60</span>
+		<span class="dot" id = "dot3">70</span>
+	</div>
+	
+	<div id ="text">
+		<p id = "p1" align="center">Enter Data Below to fill stack
+		</p>		
+	</div>
+
+	<div id = "buttons" style= "width:100%; height:100%"align="center">
+		<button id = "Back" onclick="window.location.href = 'https://adamweatherby.github.io/CS300-Project-2/'">Back</button>
+		<button id = "Randomizer" onclick= "random()">Randomizer(Creates Random Stack of 3 variables)</button>
+		<button id = "Adder" onclick= "addElement()">Add Element</button>
+		<button id = "Remover" onclick= "removeElement()">Pop</button>
+		<button id = "Modifier" onclick= "modifyElement()">Change Element</button>
+		<button id = "Searcher" onclick= "searchElement()">Search for Element</button>
+		<button id = "bigger" onclick= "addSeven()">add 7 randoms numbers</button>
+		
+		<br/><br/>
+	</div>
+	<div id = "inputters"style= "width:100%; height:100%"align="right">
+		Input Data(1 or 2 digit numbers only): <input type="text" id="inputBox" value="Number"><br/>
+		Indice selector (arr[x]): <input type="text" id="selectionBox" value="Number"><br/>
+		Index of x: <input type="text" id="searchBox" value="Number">
+	</div>
+
+</body>
+	<script>
+			increaser = 0;
+			decreaser = 0;
+			first = Math.random()*100|0;
+			second = Math.random()*100|0;
+			third = Math.random()*100|0;
+	function random(){
+			increaser = 0;
+			decreaser = 0;
+			first = Math.random()*100|0;
+			second = Math.random()*100|0;
+			third = Math.random()*100|0;
+			document.getElementById("nodes").innerHTML = "<span class='dot' id = 'dot1'>"+first+"</span>&nbsp;<span class='dot' id = 'dot2'>"+second+"</span>&nbsp;<span class='dot' id = 'dot3'>"+third+"</span>"
+		}
+	function addSeven(){
+		for(x = 0; x < 7; x++){
+			increaser+= 1;
+			document.getElementById("nodes").innerHTML += "&nbsp;<span class='dot' id = 'dot"+(increaser+3)+"'>"+(Math.random()*100|0)+"</span>";
+		}
+	}
+	function addElement(){
+			increaser++;
+			var input = document.getElementById("inputBox").value;
+			document.getElementById("nodes").innerHTML += "&nbsp;<span class='dot' id = 'dot"+(increaser+3)+"'>"+input+"</span>";
+	}
+	function removeElement(){
+			if(document.getElementById('dot'+(increaser+3)).innerHTML.charAt(1)=='<')
+				window.alert(document.getElementById('dot'+(increaser+3)).innerHTML.substr(0, 1)+" was removed from the top of the stack");
+			else
+				window.alert(document.getElementById('dot'+(increaser+3)).innerHTML.substr(0, 2)+" was removed from the top of the stack");
+			document.getElementById('dot'+(increaser+3)).id = "removed"+(1+decreaser);
+			document.getElementById("removed"+(1+decreaser)).style.display = "none";
+			decreaser++;
+			increaser--;
+			}
+	function modifyElement(){
+			var selection = document.getElementById("selectionBox").value;
+			selection++;
+			console.log(selection);
+			var input =  document.getElementById("inputBox").value;
+			console.log(input);
+			document.getElementById("dot"+(selection)).innerHTML = input;
+	}
+	function searchElement(){
+			var search = document.getElementById("searchBox").value;
+			var x = 2;
+				while(x<(5+(increaser-decreaser))){
+				console.log(increaser);
+			console.log(document.getElementById("dot"+(x-1)).innerHTML.substr(0, 2));
+					if(document.getElementById("dot"+(x-1)).innerHTML.charAt(1)=='<'){
+						if(document.getElementById("dot"+(x-1)).innerHTML.substr(0, 1)==search)
+						{
+							window.alert("Value is at arr["+(x-2)+"]");
+						}
+						}
+					if(document.getElementById("dot"+(x-1)).innerHTML.substr(0, 2)==search)
+						{
+							window.alert("Value is at arr["+(x-2)+"]");
+							
+
+						}
+						x++;
+			}
+			}
+	</script>
+
+	<script src="js/scripts.js"></script>
+</html>
